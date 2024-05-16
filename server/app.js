@@ -8,6 +8,22 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+mongoose
+  .connect(
+    'mongodb+srv://sambhavmehta:foHSMm3ALKrfbxWR@cluster0.eztpe0l.mongodb.net/Information'
+  )
+  .then((result) => {
+    console.log('Connected!');
+    console.log('Hehe');
+    app.listen(3000);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+app.get('/', (req, res) => {
+  res.send("This is a VITB-INSIGHTS' API by Team 139");
+});
 app.post('/api/form-data', (req, res) => {
   const formData = req.body;
   console.log('Received form data:', formData);
@@ -21,16 +37,3 @@ app.post('/api/form-data', (req, res) => {
     });
   //   res.status(200).send('Form data received successfully');
 });
-
-mongoose
-  .connect(
-    'mongodb+srv://sambhavmehta:foHSMm3ALKrfbxWR@cluster0.eztpe0l.mongodb.net/Information'
-  )
-  .then((result) => {
-    console.log('Connected!');
-    console.log('Hehe');
-    app.listen(3000);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
