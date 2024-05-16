@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Form</title>
+    <link rel="stylesheet" href="../client/index.css" />
+  </head>
+  <body>
+    <div class="forms">
+      <h1>Suchi Manufacturing Execution System</h1>
+      <form id="myForm" method="post">
+        <div class="form-container">
+          <div class="form-column">
+            <label for="lot_number">Lot#</label>
+            <input type="text" id="Lot" name="Lot" required /><br /><br />
+
+            <label for="process_step">Process Step</label>
+            <select id="Process Step" name="Process Step">
+              <option value="Saw">Saw</option>
+              <option value="WB">WB</option>
+              <option value="Mold">Mold</option>
+              <option value="Dejunk">Dejunk</option>
+              <option value="Tnf">Tnf</option></select
+            ><br /><br />
+
+            <label for="lot_qty">Lot Qty In</label>
+            <input
+              type="number"
+              id="Lot Qty In"
+              name="Lot Qty In"
+              required
+            /><br /><br />
+
+            <label for="machine">Machine</label>
+            <select id="Machine" name="Machine">
+              <option value="DA1">DA1</option>
+              <option value="DA2">DA2</option>
+              <option value="DA3">DA3</option></select
+            ><br /><br />
+          </div>
+          <div class="form-column">
+            <label for="date_time">Date/Time</label>
+            <input
+              type="text"
+              id="Date_Time"
+              name="Date_Time"
+              value=""
+              readonly
+            /><br /><br />
+
+            <label for="device">Device</label>
+            <input type="text" id="Device" name="Device" required /><br /><br />
+
+            <label for="product_family">Product Family</label>
+            <select id="Product Family" name="Product Family">
+              <option value="SOIC">SOIC</option>
+              <option value="SOT223">SOT223</option>
+              <option value="SC70">SC70</option>
+              <option value="QFN">QFN</option></select
+            ><br /><br />
+
+            <label for="shift">Shift</label>
+            <select id="Shift" name="Shift">
+              <option value="A">A</option>
+              <option value="B">B</option></select
+            ><br /><br />
+          </div>
+        </div>
+
+        <button type="submit" class="button1">Submit</button>
+      </form>
+    </div>
+
+    <script>
+      const form = document.getElementById('myForm');
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault(); // Prevent default form submission behavior
+
+        const formData = new FormData(event.target);
+        const serializedFormData = {};
+
+        // Convert FormData to a plain JavaScript object
+        for (let [key, value] of formData.entries()) {
+          serializedFormData[key] = value;
+        }
+
+        // Get the current date and time from the user's system
+        const now = new Date();
+        const formattedDate = `${now.getFullYear()}-${(now.getMonth() + 1)
+          .toString()
+          .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ${now
+          .getHours()
+          .toString()
+          .padStart(2, '0')}:${now
+          .getMinutes()
+          .toString()
+          .padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
+
+        // Set the current date and time to the 'date_time' field
+        serializedFormData['Date_Time'] = formattedDate;
+
+        // Update the 'date_time' input field value
+        const dateTimeInput = document.getElementById('Date_Time');
+        dateTimeInput.value = formattedDate;
+
+        console.log(serializedFormData);
+        try {
+          const response = await fetch('http://localhost:3000/api/form-data', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json', // Set appropriate Content-Type header
+            },
+            body: JSON.stringify(serializedFormData), // Serialize form data to JSON string
+          });
+          if (response.ok) {
+            console.log('Form data submitted successfully');
+            form.reset(); // Reset the form fields
+          } else {
+            console.error('Failed to submit form data:', response.statusText);
+          }
+        } catch (error) {
+          console.error('Error submitting form data:', error);
+        }
+      });
+    </script>
+  </body>
+</html>
