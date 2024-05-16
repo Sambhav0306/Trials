@@ -28,6 +28,7 @@ mongoose
   )
   .then((result) => {
     console.log('Connected!');
+    console.log('Hehe');
     app.listen(3000);
   })
   .catch((err) => {
