@@ -1,0 +1,72 @@
+body,
+html {
+  height: 100%;
+}
+
+.forms {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 90%;
+  height: 80%;
+  margin-top: 3%;
+  margin-left: 5%;
+  background-color: rgb(54, 93, 160);
+}
+
+.forms h1 {
+  text-align: center;
+}
+
+.form-container {
+  display: flex;
+  margin-top: 4%;
+  gap: 10px;
+}
+
+.form-column {
+  flex: 1;
+  padding: 0 20px;
+}
+
+label,
+input,
+select {
+  font-size: 16px;
+}
+
+input,
+select {
+  padding: 10px;
+}
+
+label,
+input,
+select {
+  margin-bottom: 15px;
+}
+
+input,
+select {
+  width: calc(100% - 150px);
+}
+
+label {
+  font-weight: bold;
+}
+
+label,
+input {
+  display: inline-block;
+}
+
+/* Corrected button styling */
+.button1 {
+  margin-top: 5%;
+  margin-left: 42%;
+  height: 12%;
+  width: 10%;
+  font-weight: bold;
+  border-radius: 10px;
+}
