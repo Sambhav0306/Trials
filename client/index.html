@@ -107,13 +107,16 @@
 
         console.log(serializedFormData);
         try {
-          const response = await fetch('https://trials-rk57.onrender.com/', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json', // Set appropriate Content-Type header
-            },
-            body: JSON.stringify(serializedFormData), // Serialize form data to JSON string
-          });
+          const response = await fetch(
+            'https://trials-rk57.onrender.com/api/form-data',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json', // Set appropriate Content-Type header
+              },
+              body: JSON.stringify(serializedFormData), // Serialize form data to JSON string
+            }
+          );
           if (response.ok) {
             console.log('Form data submitted successfully');
             form.reset(); // Reset the form fields
