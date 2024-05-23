@@ -30,6 +30,7 @@ app.get('/', (req, res) => {
 app.post('/api/form-data', (req, res) => {
   const formData = req.body;
   console.log('Received form data:', formData);
+  //for checking
   InfoSchema.create(formData)
     .then((result) => {
       console.log(result);

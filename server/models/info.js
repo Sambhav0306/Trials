@@ -21,7 +21,6 @@ const infoSchema = new Schema({
   },
   Date_Time: {
     type: String,
-    // required: true,
   },
   Device: {
     type: String,
